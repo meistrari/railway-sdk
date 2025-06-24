@@ -1,25 +1,25 @@
 {
   "name": "@meistrari/railway-sdk",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
+      "default": "./dist/index.mjs"
     },
     "./environment": {
       "types": "./dist/resources/environment.d.ts",
-      "import": "./dist/resources/environment.js",
+      "import": "./dist/resources/environment.mjs",
       "require": "./dist/resources/environment.cjs",
-      "default": "./dist/resources/environment.js"
+      "default": "./dist/resources/environment.mjs"
     },
     "./variable": {
       "types": "./dist/resources/variable.d.ts",
-      "import": "./dist/resources/variable.js",
+      "import": "./dist/resources/variable.mjs",
       "require": "./dist/resources/variable.cjs",
-      "default": "./dist/resources/variable.js"
+      "default": "./dist/resources/variable.mjs"
     }
   },
   "module": "src/index.ts",
