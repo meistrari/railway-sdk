@@ -1,0 +1,51 @@
+{
+  "name": "@meistrari/railway-sdk",
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./environment": {
+      "types": "./dist/resources/environment.d.ts",
+      "import": "./dist/resources/environment.js",
+      "require": "./dist/resources/environment.cjs",
+      "default": "./dist/resources/environment.js"
+    },
+    "./variable": {
+      "types": "./dist/resources/variable.d.ts",
+      "import": "./dist/resources/variable.js",
+      "require": "./dist/resources/variable.cjs",
+      "default": "./dist/resources/variable.js"
+    }
+  },
+  "module": "src/index.ts",
+  "files": ["dist"],
+  "scripts": {
+    "prepare": "bunx husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "unbuild"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.16.1",
+    "@types/bun": "latest",
+    "eslint": "^9.29.0",
+    "husky": "^9.1.7",
+    "unbuild": "^3.5.0"
+  },
+  "lint-staged": {
+    "*": [
+      "eslint --fix"
+    ]
+  }
+}
