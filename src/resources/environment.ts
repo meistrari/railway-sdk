@@ -140,9 +140,91 @@ async function createToken({
   return createdTokenResponse.projectTokenCreate
 }
 
+async function waitForDeployment({
+  projectId,
+  environmentId,
+  serviceId,
+  requestInterval = 5000,
+  poolTimeout,
+}: {
+  projectId: string
+  environmentId: string
+  serviceId: string
+  requestInterval?: number
+  poolTimeout?: number
+}) {
+  interface Deployment {
+    id: string
+    status: string
+    updatedAt: string
+  }
+
+  const progressStatuses = ['INITIALIZING', 'BUILDING', 'DEPLOYING']
+  const failureStatuses = ['FAILED', 'CRASHED', 'REMOVED']
+  const successStatuses = ['SUCCESS']
+
+  const start = Date.now()
+
+  while (true) {
+    if (poolTimeout && Date.now() - start > poolTimeout) {
+      throw new Error(`Deployment timed out after ${poolTimeout}ms`)
+    }
+
+    interface LatestDeploymentResponse {
+      deployments: {
+        edges: Array<{
+          node: Deployment
+        }>
+      }
+    }
+    const input = {
+      projectId,
+      environmentId,
+      serviceId,
+    }
+    const data = await graphQLRequest<LatestDeploymentResponse>(`
+        query MyQuery {
+            deployments(input: ${graphQLifyObject(input)}, first: 1) {
+                edges {
+                    node {
+                        id
+                        status
+                        updatedAt
+                    }
+                }
+            }
+        }
+    `)
+
+    const [deployment] = data.deployments.edges
+
+    if (!deployment) {
+      throw new Error('No deployments found.')
+    }
+
+    const deploymentStatus = deployment.node.status
+
+    if (successStatuses.includes(deploymentStatus)) {
+      break
+    }
+
+    if (progressStatuses.includes(deploymentStatus)) {
+      await new Promise(resolve => setTimeout(resolve, requestInterval))
+      continue
+    }
+
+    if (failureStatuses.includes(deploymentStatus)) {
+      throw new Error(`Deployment failed with status: ${deploymentStatus}`)
+    }
+
+    throw new Error(`Unknown deployment status: ${deploymentStatus}`)
+  }
+}
+
 export default {
   get,
   create,
   deleteToken,
   createToken,
+  waitForDeployment,
 }
