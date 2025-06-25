@@ -221,10 +221,26 @@ async function waitForDeployment({
   }
 }
 
+async function deleteEnvironment(environmentId: string) {
+  interface DeleteEnvironmentResponse {
+    environmentDelete: boolean
+  }
+  const response = await graphQLRequest<DeleteEnvironmentResponse>(`
+    mutation MyMutation {
+      environmentDelete(id: "${environmentId}")
+    }
+  `)
+
+  if (!response.environmentDelete) {
+    throw new Error(`Failed to delete environment with ID: ${environmentId}`)
+  }
+}
+
 export default {
   get,
   create,
   deleteToken,
   createToken,
   waitForDeployment,
+  deleteEnvironment,
 }
