@@ -1,6 +1,6 @@
 import graphQLRequest, { graphQLifyObject } from '../helper'
 
-export async function collectionUpsert(input: {
+async function collectionUpsert(input: {
   environmentId: string
   projectId: string
   /**

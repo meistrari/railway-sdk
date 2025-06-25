@@ -1,6 +1,6 @@
 import graphQLRequest, { graphQLifyObject } from '../helper'
 
-export async function get({
+async function get({
   projectId,
   environmentName,
 }: {
@@ -38,7 +38,7 @@ export async function get({
   return environment.node.id
 }
 
-export async function create(input: {
+async function create(input: {
   name: string
   projectId: string
 
@@ -71,17 +71,13 @@ export async function create(input: {
 
   return environment.environmentCreate.id
 }
-
-interface CreateTokenInput {
-  environmentId: string
-  projectId: string
-  tokenName: string
-}
-export async function createToken({
+async function deleteToken({
   projectId,
   environmentId,
-  tokenName,
-}: CreateTokenInput) {
+}: {
+  projectId: string
+  environmentId: string
+}) {
   const existingTokens = await graphQLRequest<{
     projectTokens: {
       edges: Array<{
@@ -116,6 +112,18 @@ export async function createToken({
       }
     `)
   }
+}
+
+async function createToken({
+  projectId,
+  environmentId,
+  tokenName,
+}: {
+  environmentId: string
+  projectId: string
+  tokenName: string
+}) {
+  await deleteToken({ projectId, environmentId })
 
   const createdTokenResponse = await graphQLRequest<{
     projectTokenCreate: string
@@ -135,5 +143,6 @@ export async function createToken({
 export default {
   get,
   create,
+  deleteToken,
   createToken,
 }
