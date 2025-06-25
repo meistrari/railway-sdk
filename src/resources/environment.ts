@@ -131,3 +131,9 @@ export async function createToken({
 
   return createdTokenResponse.projectTokenCreate
 }
+
+export default {
+  get,
+  create,
+  createToken,
+}

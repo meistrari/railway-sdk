@@ -24,3 +24,7 @@ export async function collectionUpsert(input: {
     throw new Error('Failed to upsert variable collection')
   }
 }
+
+export default {
+  collectionUpsert,
+}

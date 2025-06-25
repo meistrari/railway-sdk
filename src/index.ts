@@ -1,3 +1,3 @@
-import * as resources from './resources'
+import resources from './resources'
 
 export default resources
