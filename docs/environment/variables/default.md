@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [environment.ts:263](https://github.com/meistrari/railway-sdk/blob/950f1095d1910be91ddba0267bcbe74ff30bbcc1/src/resources/environment.ts#L263)
+Defined in: [environment.ts:278](https://github.com/meistrari/railway-sdk/blob/75ed93e9a33db2324064394627b2c718f668dc2c/src/resources/environment.ts#L278)
 
 ## Type declaration
 
@@ -101,6 +101,20 @@ The token name
 `Promise`\<`string`\>
 
 The token ID
+
+### deleteEnvironment()
+
+> **deleteEnvironment**: (`environmentId`) => `Promise`\<`void`\>
+
+#### Parameters
+
+##### environmentId
+
+`string`
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ### deleteToken()
 
