@@ -1,6 +1,15 @@
+/**
+ * Manage Railway services
+ * @module service
+ */
 import graphQLRequest from '../helper'
 
-async function getById(serviceId: string) {
+/**
+ * Get a service by ID
+ * @param {string} serviceId - The ID of the service to get
+ * @returns {Promise<object>} The service
+ */
+export async function getById(serviceId: string) {
   interface Response {
     service: {
       id: string
