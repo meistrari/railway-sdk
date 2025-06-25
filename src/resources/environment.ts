@@ -1,6 +1,18 @@
+/**
+ * Manage Railway environments
+ * @module environment
+ */
+
 import graphQLRequest, { graphQLifyObject } from '../helper'
 
-async function get({
+/**
+ * Get an environment by name
+ * @param {object} input - The input parameters
+ * @param {string} input.projectId - The project ID
+ * @param {string} input.environmentName - The environment name
+ * @returns {Promise<string | null>} The environment ID or null if not found
+ */
+export async function get({
   projectId,
   environmentName,
 }: {
@@ -38,22 +50,23 @@ async function get({
   return environment.node.id
 }
 
-async function create(input: {
+/**
+ * Create an environment
+ * @param {object} input - The input parameters
+ * @param {string} input.name - The environment name
+ * @param {string} input.projectId - The project ID
+ * @param {boolean} input.ephemeral - Whether the environment is ephemeral
+ * @param {boolean} input.skipInitialDeploys - When committing the changes immediately, skip any initial deployments.
+ * @param {string} input.sourceEnvironmentId - Create the environment with all of the services, volumes, configuration, and variables from this source environment.
+ * @param {boolean} input.stageInitialChanges - Stage the initial changes for the environment. If false (default), the changes will be committed immediately.
+ * @returns {Promise<string>} The environment ID
+ */
+export async function create(input: {
   name: string
   projectId: string
-
   ephemeral?: boolean
-  /**
-   * When committing the changes immediately, skip any initial deployments.
-   */
   skipInitialDeploys?: boolean
-  /**
-   * Create the environment with all of the services, volumes, configuration, and variables from this source environment.
-   */
   sourceEnvironmentId?: string
-  /**
-   * Stage the initial changes for the environment. If false (default), the changes will be committed immediately.
-   */
   stageInitialChanges?: boolean
 }) {
   interface Response {
@@ -71,7 +84,15 @@ async function create(input: {
 
   return environment.environmentCreate.id
 }
-async function deleteToken({
+
+/**
+ * Delete an environment token
+ * @param {object} input - The input parameters
+ * @param {string} input.projectId - The project ID
+ * @param {string} input.environmentId - The environment ID
+ * @returns {Promise<void>}
+ */
+export async function deleteToken({
   projectId,
   environmentId,
 }: {
@@ -114,7 +135,15 @@ async function deleteToken({
   }
 }
 
-async function createToken({
+/**
+ * Create an environment token
+ * @param {object} input - The input parameters
+ * @param {string} input.projectId - The project ID
+ * @param {string} input.environmentId - The environment ID
+ * @param {string} input.tokenName - The token name
+ * @returns {Promise<string>} The token ID
+ */
+export async function createToken({
   projectId,
   environmentId,
   tokenName,
@@ -140,7 +169,17 @@ async function createToken({
   return createdTokenResponse.projectTokenCreate
 }
 
-async function waitForDeployment({
+/**
+ * Wait for a deployment to complete
+ * @param {object} input - The input parameters
+ * @param {string} input.projectId - The project ID
+ * @param {string} input.environmentId - The environment ID
+ * @param {string} input.serviceId - The service ID
+ * @param {number} input.requestInterval - The request interval
+ * @param {number} input.poolTimeout - The pool timeout
+ * @returns {Promise<void>}
+ */
+export async function waitForDeployment({
   projectId,
   environmentId,
   serviceId,
