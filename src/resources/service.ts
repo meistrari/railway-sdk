@@ -20,6 +20,41 @@ async function getById(serviceId: string) {
   return service.service
 }
 
+async function getDomains(input: {
+  projectId: string
+  environmentId: string
+  serviceId: string
+}) {
+  interface Domain {
+    domain: string
+  }
+  interface Response {
+    domains: {
+      customDomains: Domain[]
+      serviceDomains: Domain[]
+    }
+  }
+
+  const response = await graphQLRequest<Response>(`
+    query MyQuery {
+      domains(projectId: "${input.projectId}", environmentId: "${input.environmentId}", serviceId: "${input.serviceId}") {
+        customDomains {
+          domain
+        }
+        serviceDomains {
+          domain
+        }
+      }
+    }
+  `)
+
+  return {
+    customDomain: response.domains.customDomains[0]?.domain || null,
+    serviceDomains: response.domains.serviceDomains[0]?.domain || null,
+  }
+}
+
 export default {
   getById,
+  getDomains,
 }
