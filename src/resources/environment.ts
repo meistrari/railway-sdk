@@ -236,9 +236,20 @@ async function deleteEnvironment(environmentId: string) {
   }
 }
 
+async function rename(environmentId: string, newName: string) {
+  await graphQLRequest(`
+    mutation MyMutation {
+      environmentRename(id: "${environmentId}", input: { name: "${newName}" }) {
+        id
+      }
+    }
+  `)
+}
+
 export default {
   get,
   create,
+  rename,
   deleteToken,
   createToken,
   waitForDeployment,
