@@ -1,4 +1,5 @@
 import graphQLRequest, { graphQLifyObject } from '../helper'
+import project from './project'
 
 async function get({
   projectId,
@@ -7,35 +8,15 @@ async function get({
   projectId: string
   environmentName: string
 }) {
-  const data = await graphQLRequest<{
-    environments: {
-      edges: Array<{
-        node: {
-          id: string
-          name: string
-        }
-      }>
-    }
-  }>(`
-    query MyQuery {
-      environments(projectId: "${projectId}") {
-        edges {
-          node {
-            id
-            name
-          }
-        }
-      }
-    }
-  `)
+  const environments = await project.getAllEnvironments(projectId)
 
-  const environment = data.environments.edges.find(edge => edge.node.name === environmentName)
+  const environment = environments.find(environment => environment.name === environmentName)
 
   if (!environment) {
     return null
   }
 
-  return environment.node.id
+  return environment.id
 }
 
 async function create(input: {
