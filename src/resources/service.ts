@@ -50,7 +50,7 @@ async function getDomains(input: {
 
   return {
     customDomain: response.domains.customDomains[0]?.domain || null,
-    serviceDomains: response.domains.serviceDomains[0]?.domain || null,
+    serviceDomain: response.domains.serviceDomains[0]?.domain || null,
   }
 }
 
