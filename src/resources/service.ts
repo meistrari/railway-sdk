@@ -63,7 +63,34 @@ async function getDomains(input: {
   }
 }
 
+async function createDomain(input: {
+  environmentId: string
+  serviceId: string
+  targetPort: number
+}) {
+  interface Response {
+    serviceDomainCreate: {
+      domain: string
+    }
+  }
+
+  const response = await graphQLRequest<Response>(`
+    mutation MyMutation {
+      serviceDomainCreate(input: {
+        environmentId: "${input.environmentId}",
+        serviceId: "${input.serviceId}",
+        targetPort: ${input.targetPort}
+      }) {
+        domain
+      }
+    }
+  `)
+
+  return response.serviceDomainCreate.domain
+}
+
 export default {
   getById,
   getDomains,
+  createDomain,
 }
