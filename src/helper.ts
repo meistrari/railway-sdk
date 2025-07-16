@@ -5,6 +5,12 @@ const RAILWAY_TOKEN = z.string().parse(Bun.env.RAILWAY_TOKEN)
 
 const RAILWAY_GRAPHQL_ENDPOINT = 'https://backboard.railway.app/graphql/v2'
 
+export class RailwayRequestError extends Error {
+  constructor(public readonly response: Response) {
+    super(`Railway API request failed with status ${response.status}`)
+  }
+}
+
 async function graphQLRequest<T = unknown>(query: string, logger = console) {
   const response = await fetch(RAILWAY_GRAPHQL_ENDPOINT, {
     method: 'POST',
@@ -16,8 +22,7 @@ async function graphQLRequest<T = unknown>(query: string, logger = console) {
   })
 
   if (!response.ok) {
-    const errorText = await response.text()
-    throw new Error(`GraphQL request failed: ${errorText}`)
+    throw new RailwayRequestError(response)
   }
 
   const result = await response.json() as { data: T }
