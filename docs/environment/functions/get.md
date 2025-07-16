@@ -8,7 +8,7 @@
 
 > **get**(`input`): `Promise`\<`null` \| `string`\>
 
-Defined in: [environment.ts:16](https://github.com/meistrari/railway-sdk/blob/885a37132f261e7d319cf71b6b874a177f1282fc/src/resources/environment.ts#L16)
+Defined in: [environment.ts:16](https://github.com/meistrari/railway-sdk/blob/e3c7edb92d6d164bb9834eff1cd69f03a146168a/src/resources/environment.ts#L16)
 
 Get an environment by name
 
