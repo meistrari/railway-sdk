@@ -11,6 +11,7 @@ import graphQLRequest, { graphQLifyObject } from '../helper'
  * @param {string} input.projectId - The ID of the project
  * @param {boolean} input.replace - When set to true, removes all existing variables before upserting the new collection.
  * @param {string} input.serviceId - The ID of the service
+ * @param {boolean} input.skipDeploys - When set to true, skips deploying the service after upserting the variables.
  * @param {Record<string, string>} input.variables - The variables to upsert
  */
 export async function collectionUpsert(input: {
@@ -18,6 +19,7 @@ export async function collectionUpsert(input: {
   projectId: string
   replace?: boolean
   serviceId?: string
+  skipDeploys?: boolean
   variables: Record<string, string>
 }) {
   interface Response {
