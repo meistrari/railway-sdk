@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [environment.ts:269](https://github.com/meistrari/railway-sdk/blob/fd6644bef5eeb1adc378aa7d7e892c499b1c37a5/src/resources/environment.ts#L269)
+Defined in: [environment.ts:321](https://github.com/meistrari/railway-sdk/blob/56869a17687ab20a9aa94386d3ebd5067c2edee9/src/resources/environment.ts#L321)
 
 ## Type declaration
 
@@ -84,11 +84,23 @@ The input parameters
 
 The environment ID
 
+###### maxRetries?
+
+`number` = `5`
+
+Maximum number of retries (default: 5)
+
 ###### projectId
 
 `string`
 
 The project ID
+
+###### requestInterval?
+
+`number` = `5000`
+
+The request interval for polling (default: 5000ms)
 
 ###### tokenName
 

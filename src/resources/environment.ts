@@ -3,6 +3,7 @@
  * @module environment
  */
 
+import { setTimeout } from 'node:timers/promises'
 import graphQLRequest, { graphQLifyObject } from '../helper'
 import project from './project'
 
@@ -122,32 +123,84 @@ export async function deleteToken({
  * @param {string} input.projectId - The project ID
  * @param {string} input.environmentId - The environment ID
  * @param {string} input.tokenName - The token name
+ * @param {number} input.requestInterval - The request interval for polling (default: 5000ms)
+ * @param {number} input.maxRetries - Maximum number of retries (default: 5)
  * @returns {Promise<string>} The token ID
  */
 export async function createToken({
   projectId,
   environmentId,
   tokenName,
+  requestInterval = 5000,
+  maxRetries = 5,
 }: {
   environmentId: string
   projectId: string
   tokenName: string
+  requestInterval?: number
+  maxRetries?: number
 }) {
   await deleteToken({ projectId, environmentId })
 
-  const createdTokenResponse = await graphQLRequest<{
-    projectTokenCreate: string
-  }>(`
-    mutation MyMutation {
-      projectTokenCreate(input: {
-        environmentId: "${environmentId}",
-        name: "${tokenName}",
-        projectId: "${projectId}"
-      })
-    }
-  `)
+  let retries = 0
 
-  return createdTokenResponse.projectTokenCreate
+  while (retries < maxRetries) {
+    const createdTokenResponse = await graphQLRequest<{
+      projectTokenCreate: string
+    }>(`
+      mutation MyMutation {
+        projectTokenCreate(input: {
+          environmentId: "${environmentId}",
+          name: "${tokenName}",
+          projectId: "${projectId}"
+        })
+      }
+    `)
+
+    const tokenValue = createdTokenResponse.projectTokenCreate
+
+    await setTimeout(requestInterval)
+
+    const existingTokens = await graphQLRequest<{
+      projectTokens: {
+        edges: Array<{
+          node: {
+            id: string
+            displayToken: string
+            environment: {
+              id: string
+            }
+          }
+        }>
+      }
+    }>(`
+      query MyQuery {
+        projectTokens(projectId: "${projectId}") {
+          edges {
+            node {
+              id
+              displayToken
+              environment {
+                id
+              }
+            }
+          }
+        }
+      }
+    `)
+
+    const createdToken = existingTokens.projectTokens.edges.find(
+      edge => edge.node.environment.id === environmentId && edge.node.displayToken === tokenValue,
+    )
+
+    if (createdToken) {
+      return tokenValue
+    }
+
+    retries++
+  }
+
+  throw new Error(`Failed to create token after ${maxRetries} retries`)
 }
 
 /**
@@ -229,7 +282,7 @@ export async function waitForDeployment({
     }
 
     if (progressStatuses.includes(deploymentStatus)) {
-      await new Promise(resolve => setTimeout(resolve, requestInterval))
+      await setTimeout(requestInterval)
       continue
     }
 
