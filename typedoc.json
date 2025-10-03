@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["src/resources/environment.ts", "src/resources/service.ts", "src/resources/variable.ts"],
+  "entryPoints": ["src/resources/*"],
   "plugin": ["typedoc-plugin-markdown"],
   "cleanOutputDir": true,
   "readme": "none"
