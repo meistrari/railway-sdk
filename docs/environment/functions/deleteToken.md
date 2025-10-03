@@ -8,7 +8,7 @@
 
 > **deleteToken**(`input`): `Promise`\<`void`\>
 
-Defined in: [environment.ts:76](https://github.com/meistrari/railway-sdk/blob/56869a17687ab20a9aa94386d3ebd5067c2edee9/src/resources/environment.ts#L76)
+Defined in: [environment.ts:76](https://github.com/meistrari/railway-sdk/blob/315cdfd39f486c1255f8966560e866467cb24f42/src/resources/environment.ts#L76)
 
 Delete an environment token
 

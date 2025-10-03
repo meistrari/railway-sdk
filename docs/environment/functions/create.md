@@ -8,7 +8,7 @@
 
 > **create**(`input`): `Promise`\<`string`\>
 
-Defined in: [environment.ts:45](https://github.com/meistrari/railway-sdk/blob/56869a17687ab20a9aa94386d3ebd5067c2edee9/src/resources/environment.ts#L45)
+Defined in: [environment.ts:45](https://github.com/meistrari/railway-sdk/blob/315cdfd39f486c1255f8966560e866467cb24f42/src/resources/environment.ts#L45)
 
 Create an environment
 
