@@ -25,7 +25,13 @@ async function graphQLRequest<T = unknown>(query: string, logger = console) {
     throw new RailwayRequestError(response)
   }
 
-  const result = await response.json() as { data: T }
+  const result = await response.json() as { data: T, errors?: any }
+
+  if (result.errors) {
+    logger.error('❌ GraphQL request returned errors')
+    logger.error(JSON.stringify(result.errors, null, 2))
+    throw new Error('GraphQL request returned errors')
+  }
 
   if (!result.data) {
     logger.error('❌ GraphQL request returned null data')
@@ -38,9 +44,26 @@ async function graphQLRequest<T = unknown>(query: string, logger = console) {
 
 export default graphQLRequest
 
+export class Enum {
+  constructor(public readonly values: string[]) {
+  }
+
+  toGraphQL() {
+    return `[${this.values.join(',')}]`
+  }
+}
+
+export function zEnum<T extends string>(values: readonly [T, ...T[]]) {
+  return z.array(z.enum(values)).transform(values => new Enum(values))
+}
+
 export function graphQLifyObject(input: Primitive | Record<string, any>): number | string {
   if (typeof input === 'number') {
     return input
+  }
+
+  if (input instanceof Enum) {
+    return input.toGraphQL()
   }
 
   if (Array.isArray(input)) {
