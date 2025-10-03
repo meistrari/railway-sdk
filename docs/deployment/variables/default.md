@@ -1,0 +1,89 @@
+[**@meistrari/railway-sdk**](../../README.md)
+
+***
+
+[@meistrari/railway-sdk](../../README.md) / [deployment](../README.md) / default
+
+# Variable: default
+
+> **default**: `object`
+
+Defined in: [src/resources/deployment.ts:123](https://github.com/meistrari/railway-sdk/blob/4121e2accb658089536ab841cb74fe6d1e324c80/src/resources/deployment.ts#L123)
+
+## Type declaration
+
+### cancel()
+
+> **cancel**: (`deploymentId`) => `Promise`\<`boolean`\>
+
+Cancel a deployment
+
+#### Parameters
+
+##### deploymentId
+
+`string`
+
+The ID of the deployment to cancel
+
+#### Returns
+
+`Promise`\<`boolean`\>
+
+### list()
+
+> **list**: (`input`) => `Promise`\<`object`[]\>
+
+Get deployments for a service
+
+#### Parameters
+
+##### input
+
+The input parameters
+
+###### environmentId?
+
+`string` = `...`
+
+(Optional) The ID of the environment
+
+###### includeDeleted?
+
+`boolean` = `...`
+
+(Optional) Whether to include deleted deployments
+
+###### projectId?
+
+`string` = `...`
+
+(Optional) The ID of the project
+
+###### serviceId?
+
+`string` = `...`
+
+(Optional) The ID of the service
+
+###### status?
+
+\{ `in?`: (`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[]; `notIn?`: (`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[]; \} = `...`
+
+(Optional) Filter deployments by status
+
+###### status.in?
+
+(`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[] = `...`
+
+(Optional) Array of statuses to include
+
+###### status.notIn?
+
+(`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[] = `...`
+
+(Optional) Array of statuses to exclude
+
+#### Returns
+
+`Promise`\<`object`[]\>
