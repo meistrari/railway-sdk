@@ -8,7 +8,7 @@
 
 > **collectionUpsert**(`input`): `Promise`\<`void`\>
 
-Defined in: [variable.ts:17](https://github.com/meistrari/railway-sdk/blob/fd6644bef5eeb1adc378aa7d7e892c499b1c37a5/src/resources/variable.ts#L17)
+Defined in: [variable.ts:17](https://github.com/meistrari/railway-sdk/blob/2fbd487475c12457cb4e9ce8ee7f6e3170f61238/src/resources/variable.ts#L17)
 
 Upsert a variable collection
 
