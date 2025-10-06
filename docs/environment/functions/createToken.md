@@ -8,7 +8,7 @@
 
 > **createToken**(`input`): `Promise`\<`string`\>
 
-Defined in: [src/resources/environment.ts:128](https://github.com/meistrari/railway-sdk/blob/b87a104193ea33d3b4c98eb257da92da12d9efc2/src/resources/environment.ts#L128)
+Defined in: [src/resources/environment.ts:128](https://github.com/meistrari/railway-sdk/blob/ef2e51c6f97136e5c0d2b722434e52150ea13c8f/src/resources/environment.ts#L128)
 
 Create an environment token
 
