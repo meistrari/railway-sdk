@@ -22,6 +22,8 @@ async function graphQLRequest<T = unknown>(query: string, logger = console) {
   })
 
   if (!response.ok) {
+    logger.error('❌ GraphQL request failed')
+    logger.error(query)
     throw new RailwayRequestError(response)
   }
 
@@ -29,7 +31,6 @@ async function graphQLRequest<T = unknown>(query: string, logger = console) {
 
   if (result.errors) {
     logger.error('❌ GraphQL request returned errors')
-    logger.error(query)
     logger.error(JSON.stringify(result.errors, null, 2))
     throw new Error('GraphQL request returned errors')
   }
