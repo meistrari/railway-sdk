@@ -138,11 +138,14 @@ async function create(input: {
     }
   }
 
-  const params = {
+  const params: Record<string, any> = {
     environmentId: input.environmentId,
     serviceId: input.serviceId,
     commitSha: input.commitSha,
-    ...(input.commitSha ? { latestCommit: !input.commitSha } : {}),
+  }
+
+  if (!input.commitSha) {
+    params.latestCommit = true
   }
 
   const response = await graphQLRequest<Response>(`

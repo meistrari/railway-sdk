@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/index.ts:7](https://github.com/meistrari/railway-sdk/blob/1bc81407606cd940e55f34a4ab1a46b48473df20/src/resources/index.ts#L7)
+Defined in: [src/resources/index.ts:7](https://github.com/meistrari/railway-sdk/blob/3dab4a4377572db1722a28e4c1358c10984cab64/src/resources/index.ts#L7)
 
 ## Type declaration
 
@@ -141,6 +141,10 @@ Create an environment
 ###### input
 
 The input parameters
+
+###### applyChangesInBackground?
+
+`boolean`
 
 ###### ephemeral?
 
