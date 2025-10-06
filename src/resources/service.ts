@@ -115,24 +115,22 @@ async function getForEnvironment(input: {
   environmentId: string
 }) {
   interface Response {
-    data: {
-      environment: {
-        serviceInstances: {
-          edges: Array<{
-            node: {
-              serviceName: string
-              serviceId: string
-              domains: {
-                customDomains: Array<{
-                  domain: string
-                }>
-                serviceDomains: Array<{
-                  domain: string
-                }>
-              }
+    environment: {
+      serviceInstances: {
+        edges: Array<{
+          node: {
+            serviceName: string
+            serviceId: string
+            domains: {
+              customDomains: Array<{
+                domain: string
+              }>
+              serviceDomains: Array<{
+                domain: string
+              }>
             }
-          }>
-        }
+          }
+        }>
       }
     }
   }
@@ -160,7 +158,7 @@ async function getForEnvironment(input: {
       }
   `)
 
-  return response.data.environment.serviceInstances.edges.map(edge => ({
+  return response.environment.serviceInstances.edges.map(edge => ({
     serviceName: edge.node.serviceName,
     serviceId: edge.node.serviceId,
     domains: edge.node.domains,
