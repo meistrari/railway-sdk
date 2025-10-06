@@ -133,29 +133,27 @@ async function create(input: {
   commitSha?: string
 }) {
   interface Response {
-    data: {
-      deploymentCreate: boolean
-    }
+    serviceInstanceDeploy: boolean
   }
 
-  const params: Record<string, any> = {
-    environmentId: input.environmentId,
-    serviceId: input.serviceId,
-    latestCommit: true,
-  }
+  const params = [
+    `environmentId: "${input.environmentId}"`,
+    `serviceId: "${input.serviceId}"`,
+    `latestCommit: true`,
+  ]
 
   if (input.commitSha) {
-    params.latestCommit = false
-    params.commitSha = input.commitSha
+    params[2] = `latestCommit: false`
+    params.push(`commitSha: "${input.commitSha}"`)
   }
 
   const response = await graphQLRequest<Response>(`
     mutation {
-      deploymentCreate(input: ${graphQLifyObject(params)}) 
+      serviceInstanceDeploy(${params.join(',')}) 
     }
   `)
 
-  return response.data.deploymentCreate
+  return response.serviceInstanceDeploy
 }
 
 export default {

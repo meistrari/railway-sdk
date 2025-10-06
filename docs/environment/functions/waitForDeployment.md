@@ -8,7 +8,7 @@
 
 > **waitForDeployment**(`input`): `Promise`\<`void`\>
 
-Defined in: [src/resources/environment.ts:164](https://github.com/meistrari/railway-sdk/blob/86a09470f457674801f5bee1f99da0d3e39ced25/src/resources/environment.ts#L164)
+Defined in: [src/resources/environment.ts:164](https://github.com/meistrari/railway-sdk/blob/59cf658316ea8e7ea8bb48f21d31242a5527c7c0/src/resources/environment.ts#L164)
 
 Wait for a deployment to complete
 
