@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/variable.ts:39](https://github.com/meistrari/railway-sdk/blob/ef2e51c6f97136e5c0d2b722434e52150ea13c8f/src/resources/variable.ts#L39)
+Defined in: [src/resources/variable.ts:39](https://github.com/meistrari/railway-sdk/blob/a8a3608a7b1f0ebbb42838fcf133ac76b58513a4/src/resources/variable.ts#L39)
 
 ## Type declaration
 
