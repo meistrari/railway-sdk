@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/service.ts:148](https://github.com/meistrari/railway-sdk/blob/7b9552361fc20fed3464e55a0e1e03a30f1cf591/src/resources/service.ts#L148)
+Defined in: [src/resources/service.ts:170](https://github.com/meistrari/railway-sdk/blob/50c12a64efaa7c3e3b78d9501e1fcf2fb3093eed/src/resources/service.ts#L170)
 
 ## Type declaration
 
@@ -16,25 +16,37 @@ Defined in: [src/resources/service.ts:148](https://github.com/meistrari/railway-
 
 > **createDomain**: (`input`) => `Promise`\<`string`\>
 
+Create a service domain
+
 #### Parameters
 
 ##### input
+
+The input parameters
 
 ###### environmentId
 
 `string`
 
+The ID of the environment
+
 ###### serviceId
 
 `string`
+
+The ID of the service
 
 ###### targetPort
 
 `number`
 
+The target port for the domain
+
 #### Returns
 
 `Promise`\<`string`\>
+
+The created domain
 
 ### getById()
 
@@ -60,38 +72,58 @@ The service
 
 > **getDomains**: (`input`) => `Promise`\<\{ `customDomain`: `null` \| `string`; `serviceDomain`: `null` \| `string`; \}\>
 
+Get domains for a service in an environment
+
 #### Parameters
 
 ##### input
 
+The input parameters
+
 ###### environmentId
 
 `string`
+
+The ID of the environment
 
 ###### projectId
 
 `string`
 
+The ID of the project
+
 ###### serviceId
 
 `string`
+
+The ID of the service
 
 #### Returns
 
 `Promise`\<\{ `customDomain`: `null` \| `string`; `serviceDomain`: `null` \| `string`; \}\>
 
+The custom and service domains
+
 ### getForEnvironment()
 
 > **getForEnvironment**: (`input`) => `Promise`\<`object`[]\>
+
+Get all service instances for an environment
 
 #### Parameters
 
 ##### input
 
+The input parameters
+
 ###### environmentId
 
 `string`
 
+The ID of the environment
+
 #### Returns
 
 `Promise`\<`object`[]\>
+
+Array of service instances with their domains
