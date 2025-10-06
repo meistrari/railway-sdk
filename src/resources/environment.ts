@@ -49,6 +49,7 @@ export async function create(input: {
   skipInitialDeploys?: boolean
   sourceEnvironmentId?: string
   stageInitialChanges?: boolean
+  applyChangesInBackground?: boolean
 }) {
   interface Response {
     environmentCreate: {
