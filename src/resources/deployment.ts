@@ -141,16 +141,17 @@ async function create(input: {
   const params: Record<string, any> = {
     environmentId: input.environmentId,
     serviceId: input.serviceId,
-    commitSha: input.commitSha,
+    latestCommit: true,
   }
 
-  if (!input.commitSha) {
-    params.latestCommit = true
+  if (input.commitSha) {
+    params.latestCommit = false
+    params.commitSha = input.commitSha
   }
 
   const response = await graphQLRequest<Response>(`
     mutation {
-      deploymentCreate(input: ${graphQLifyObject(params)})
+      deploymentCreate(input: ${graphQLifyObject(params)}) 
     }
   `)
 
