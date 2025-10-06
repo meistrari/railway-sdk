@@ -31,12 +31,14 @@ async function graphQLRequest<T = unknown>(query: string, logger = console) {
 
   if (result.errors) {
     logger.error('❌ GraphQL request returned errors')
+    logger.error(query)
     logger.error(JSON.stringify(result.errors, null, 2))
     throw new Error('GraphQL request returned errors')
   }
 
   if (!result.data) {
     logger.error('❌ GraphQL request returned null data')
+    logger.error(query)
     logger.error(JSON.stringify(result, null, 2))
     throw new Error('GraphQL request returned no data')
   }
