@@ -89,8 +89,65 @@ async function createDomain(input: {
   return response.serviceDomainCreate.domain
 }
 
+async function getForEnvironment(input: {
+  environmentId: string
+}) {
+  interface Response {
+    data: {
+      environment: {
+        serviceInstances: {
+          edges: Array<{
+            node: {
+              serviceName: string
+              serviceId: string
+              domains: {
+                customDomains: Array<{
+                  domain: string
+                }>
+                serviceDomains: Array<{
+                  domain: string
+                }>
+              }
+            }
+          }>
+        }
+      }
+    }
+  }
+
+  const response = await graphQLRequest<Response>(`
+      query MyQuery {
+        environment(id: "${input.environmentId}") {
+          serviceInstances {
+            edges {
+              node {
+                serviceName
+                serviceId
+                domains {
+                  customDomains {
+                    domain
+                  },
+                  serviceDomains {
+                    domain
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+  `)
+
+  return response.data.environment.serviceInstances.edges.map(edge => ({
+    serviceName: edge.node.serviceName,
+    serviceId: edge.node.serviceId,
+    domains: edge.node.domains,
+  }))
+}
+
 export default {
   getById,
   getDomains,
   createDomain,
+  getForEnvironment,
 }
