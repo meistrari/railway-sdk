@@ -8,7 +8,7 @@
 
 > **getById**(`serviceId`): `Promise`\<\{ `id`: `string`; `name`: `string`; \}\>
 
-Defined in: [src/resources/service.ts:12](https://github.com/meistrari/railway-sdk/blob/6bab8ece335475a63a79158add30834056453c78/src/resources/service.ts#L12)
+Defined in: [src/resources/service.ts:12](https://github.com/meistrari/railway-sdk/blob/86a09470f457674801f5bee1f99da0d3e39ced25/src/resources/service.ts#L12)
 
 Get a service by ID
 
