@@ -120,7 +120,42 @@ async function cancel(deploymentId: string) {
   return response.deploymentCancel
 }
 
+/**
+ * Create a deployment
+ * @param input - The input parameters
+ * @param input.environmentId - The ID of the environment
+ * @param input.serviceId - The ID of the service
+ * @param input.commitSha - The commit SHA to deploy
+ */
+async function create(input: {
+  environmentId: string
+  serviceId: string
+  commitSha?: string
+}) {
+  interface Response {
+    data: {
+      deploymentCreate: boolean
+    }
+  }
+
+  const params = {
+    environmentId: input.environmentId,
+    serviceId: input.serviceId,
+    commitSha: input.commitSha,
+    ...(input.commitSha ? { latestCommit: !input.commitSha } : {}),
+  }
+
+  const response = await graphQLRequest<Response>(`
+    mutation {
+      deploymentCreate(input: ${graphQLifyObject(params)})
+    }
+  `)
+
+  return response.data.deploymentCreate
+}
+
 export default {
   list,
   cancel,
+  create,
 }

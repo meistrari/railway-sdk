@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/index.ts:7](https://github.com/meistrari/railway-sdk/blob/4121e2accb658089536ab841cb74fe6d1e324c80/src/resources/index.ts#L7)
+Defined in: [src/resources/index.ts:7](https://github.com/meistrari/railway-sdk/blob/9ff19e1cb7961b52cf6d6acde3a59454380a6228/src/resources/index.ts#L7)
 
 ## Type declaration
 
@@ -29,6 +29,40 @@ Cancel a deployment
 `string`
 
 The ID of the deployment to cancel
+
+##### Returns
+
+`Promise`\<`boolean`\>
+
+#### deployment.create()
+
+> **create**: (`input`) => `Promise`\<`boolean`\>
+
+Create a deployment
+
+##### Parameters
+
+###### input
+
+The input parameters
+
+###### commitSha?
+
+`string`
+
+The commit SHA to deploy
+
+###### environmentId
+
+`string`
+
+The ID of the environment
+
+###### serviceId
+
+`string`
+
+The ID of the service
 
 ##### Returns
 
@@ -348,25 +382,37 @@ The service ID
 
 > **createDomain**: (`input`) => `Promise`\<`string`\>
 
+Create a service domain
+
 ##### Parameters
 
 ###### input
+
+The input parameters
 
 ###### environmentId
 
 `string`
 
+The ID of the environment
+
 ###### serviceId
 
 `string`
+
+The ID of the service
 
 ###### targetPort
 
 `number`
 
+The target port for the domain
+
 ##### Returns
 
 `Promise`\<`string`\>
+
+The created domain
 
 #### service.getById()
 
@@ -392,25 +438,61 @@ The service
 
 > **getDomains**: (`input`) => `Promise`\<\{ `customDomain`: `null` \| `string`; `serviceDomain`: `null` \| `string`; \}\>
 
+Get domains for a service in an environment
+
 ##### Parameters
 
 ###### input
+
+The input parameters
 
 ###### environmentId
 
 `string`
 
+The ID of the environment
+
 ###### projectId
 
 `string`
+
+The ID of the project
 
 ###### serviceId
 
 `string`
 
+The ID of the service
+
 ##### Returns
 
 `Promise`\<\{ `customDomain`: `null` \| `string`; `serviceDomain`: `null` \| `string`; \}\>
+
+The custom and service domains
+
+#### service.getForEnvironment()
+
+> **getForEnvironment**: (`input`) => `Promise`\<`object`[]\>
+
+Get all service instances for an environment
+
+##### Parameters
+
+###### input
+
+The input parameters
+
+###### environmentId
+
+`string`
+
+The ID of the environment
+
+##### Returns
+
+`Promise`\<`object`[]\>
+
+Array of service instances with their domains
 
 ### variable
 
