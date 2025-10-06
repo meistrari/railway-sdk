@@ -120,6 +120,13 @@ async function cancel(deploymentId: string) {
   return response.deploymentCancel
 }
 
+/**
+ * Create a deployment
+ * @param input - The input parameters
+ * @param input.environmentId - The ID of the environment
+ * @param input.serviceId - The ID of the service
+ * @param input.commitSha - The commit SHA to deploy
+ */
 async function create(input: {
   environmentId: string
   serviceId: string

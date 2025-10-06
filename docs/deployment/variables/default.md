@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/deployment.ts:150](https://github.com/meistrari/railway-sdk/blob/3e8b838d15db81260f7bb15024aab7e38c8a7088/src/resources/deployment.ts#L150)
+Defined in: [src/resources/deployment.ts:157](https://github.com/meistrari/railway-sdk/blob/9ff19e1cb7961b52cf6d6acde3a59454380a6228/src/resources/deployment.ts#L157)
 
 ## Type declaration
 
@@ -34,21 +34,31 @@ The ID of the deployment to cancel
 
 > **create**: (`input`) => `Promise`\<`boolean`\>
 
+Create a deployment
+
 #### Parameters
 
 ##### input
+
+The input parameters
 
 ###### commitSha?
 
 `string`
 
+The commit SHA to deploy
+
 ###### environmentId
 
 `string`
 
+The ID of the environment
+
 ###### serviceId
 
 `string`
+
+The ID of the service
 
 #### Returns
 
