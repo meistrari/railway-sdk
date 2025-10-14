@@ -2,7 +2,8 @@
  * Manage Railway services
  * @module service
  */
-import graphQLRequest from '../helper'
+import graphQLRequest, { graphQLifyObject } from '../helper'
+import environment from './environment'
 
 /**
  * Get a service by ID
@@ -165,9 +166,28 @@ async function getForEnvironment(input: {
   }))
 }
 
+interface InstanceUpdateInput {
+  source?: {
+    repo?: string | null
+  }
+}
+
+async function instanceUpdate(serviceId: string, environmentId: string, input: InstanceUpdateInput) {
+  await graphQLRequest(`
+    mutation MyMutation {
+      serviceInstanceUpdate(
+        environmentId: "${environmentId}"
+        serviceId: "${serviceId}"
+        input: ${graphQLifyObject(input)}
+      )
+    }
+  `)
+}
+
 export default {
   getById,
   getDomains,
   createDomain,
+  instanceUpdate,
   getForEnvironment,
 }
