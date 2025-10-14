@@ -11,35 +11,35 @@ export class RailwayRequestError extends Error {
   }
 }
 
-async function graphQLRequest<T = unknown>(query: string, logger = console) {
+async function graphQLRequest<T = unknown>(query: string, variables: Record<string, any> = {}) {
   const response = await fetch(RAILWAY_GRAPHQL_ENDPOINT, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${RAILWAY_TOKEN}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, variables }),
   })
 
   if (!response.ok) {
-    logger.error('❌ GraphQL request failed')
-    logger.error(query)
+    console.error('❌ GraphQL request failed')
+    console.error(query, JSON.stringify(variables, null, 2), await response.text())
     throw new RailwayRequestError(response)
   }
 
   const result = await response.json() as { data: T, errors?: any }
 
   if (result.errors) {
-    logger.error('❌ GraphQL request returned errors')
-    logger.error(query)
-    logger.error(JSON.stringify(result.errors, null, 2))
+    console.error('❌ GraphQL request returned errors')
+    console.error(query)
+    console.error(JSON.stringify(result.errors, null, 2))
     throw new Error('GraphQL request returned errors')
   }
 
   if (!result.data) {
-    logger.error('❌ GraphQL request returned null data')
-    logger.error(query)
-    logger.error(JSON.stringify(result, null, 2))
+    console.error('❌ GraphQL request returned null data')
+    console.error(query)
+    console.error(JSON.stringify(result, null, 2))
     throw new Error('GraphQL request returned no data')
   }
 
@@ -77,11 +77,29 @@ export function graphQLifyObject(input: Primitive | Record<string, any>): number
   // Stringify everything other than objects.
   if (typeof input === 'object' && input) {
     const data = Object.entries(input).map(([key, value]) => {
-      return `${key}:${graphQLifyObject(value)}`
+      return `${key}: ${graphQLifyObject(value)}`
     }).join(',')
 
     return `{ ${data} }`
   }
 
   return JSON.stringify(input)
+}
+
+export function graphQLifyInputs(input: Record<string, any>): string {
+  return Object.entries(input).map(([key, rawValue]) => {
+    const getValue = () => {
+      if (typeof rawValue === 'string') {
+        if (rawValue.startsWith('$')) {
+          return rawValue
+        }
+
+        return `"${rawValue}"`
+      }
+
+      return graphQLifyObject(rawValue)
+    }
+
+    return `${key}: ${getValue()}`
+  }).join(', ')
 }

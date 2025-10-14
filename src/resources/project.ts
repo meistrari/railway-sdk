@@ -1,4 +1,4 @@
-import graphQLRequest from '../helper'
+import graphQLRequest, { graphQLifyInputs } from '../helper'
 
 async function getAllEnvironments(projectId: string) {
   interface Response {
@@ -26,13 +26,9 @@ async function getAllEnvironments(projectId: string) {
       params.after = cursor
     }
 
-    const paramsString = Object.entries(params)
-      .map(([key, value]) => `${key}: "${value}"`)
-      .join(', ')
-
     const response = await graphQLRequest<Response>(`
       query MyQuery {
-        environments(${paramsString}) {
+        environments(${graphQLifyInputs(params)}) {
           edges {
             node {
               id

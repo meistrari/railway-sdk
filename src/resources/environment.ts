@@ -3,7 +3,7 @@
  * @module environment
  */
 
-import graphQLRequest, { graphQLifyObject } from '../helper'
+import graphQLRequest, { graphQLifyInputs, graphQLifyObject } from '../helper'
 import project from './project'
 
 /**
@@ -267,8 +267,33 @@ async function rename(environmentId: string, newName: string) {
   `)
 }
 
+interface PatchData {
+  services: Record<string, {
+    source: {
+      branch: string | null
+    }
+  }>
+}
+
+async function patch(environmentId: string, commitMessage: string, patch: PatchData) {
+  const input = {
+    environmentId,
+    commitMessage,
+    patch: '$patch',
+  }
+
+  await graphQLRequest(`
+    mutation MyMutation($patch: EnvironmentConfig) {
+      environmentPatchCommit(${graphQLifyInputs(input)})
+    }
+  `, {
+    patch,
+  })
+}
+
 export default {
   get,
+  patch,
   create,
   rename,
   deleteToken,
