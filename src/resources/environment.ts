@@ -51,7 +51,7 @@ export async function create(input: {
   stageInitialChanges?: boolean
   applyChangesInBackground?: boolean
 }) {
-  interface Response {
+  type Response = {
     environmentCreate: {
       id: string
     }
@@ -174,7 +174,7 @@ export async function waitForDeployment({
   requestInterval?: number
   poolTimeout?: number
 }) {
-  interface Deployment {
+  type Deployment = {
     id: string
     status: string
     updatedAt: string
@@ -191,7 +191,7 @@ export async function waitForDeployment({
       throw new Error(`Deployment timed out after ${poolTimeout}ms`)
     }
 
-    interface LatestDeploymentResponse {
+    type LatestDeploymentResponse = {
       deployments: {
         edges: Array<{
           node: Deployment
@@ -243,7 +243,7 @@ export async function waitForDeployment({
 }
 
 async function deleteEnvironment(environmentId: string) {
-  interface DeleteEnvironmentResponse {
+  type DeleteEnvironmentResponse = {
     environmentDelete: boolean
   }
   const response = await graphQLRequest<DeleteEnvironmentResponse>(`
@@ -267,7 +267,7 @@ async function rename(environmentId: string, newName: string) {
   `)
 }
 
-interface PatchData {
+type PatchData = {
   services: Record<string, {
     source: {
       branch: string | null

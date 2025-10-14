@@ -11,7 +11,7 @@ import environment from './environment'
  * @returns The service
  */
 export async function getById(serviceId: string) {
-  interface Response {
+  type Response = {
     service: {
       id: string
       name: string
@@ -43,10 +43,10 @@ async function getDomains(input: {
   environmentId: string
   serviceId: string
 }) {
-  interface Domain {
+  type Domain = {
     domain: string
   }
-  interface Response {
+  type Response = {
     domains: {
       customDomains: Domain[]
       serviceDomains: Domain[]
@@ -85,7 +85,7 @@ async function createDomain(input: {
   serviceId: string
   targetPort: number
 }) {
-  interface Response {
+  type Response = {
     serviceDomainCreate: {
       domain: string
     }
@@ -115,7 +115,7 @@ async function createDomain(input: {
 async function getForEnvironment(input: {
   environmentId: string
 }) {
-  interface Response {
+  type Response = {
     environment: {
       serviceInstances: {
         edges: Array<{
@@ -166,7 +166,7 @@ async function getForEnvironment(input: {
   }))
 }
 
-interface InstanceUpdateInput {
+type InstanceUpdateInput = {
   source?: {
     repo?: string | null
   }
