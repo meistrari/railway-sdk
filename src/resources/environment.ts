@@ -269,8 +269,9 @@ async function rename(environmentId: string, newName: string) {
 
 type PatchData = {
   services: Record<string, {
-    source: {
-      branch: string | null
+    source?: {
+      repo?: string | null
+      branch?: string | null
     }
   }>
 }
