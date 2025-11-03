@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/environment.ts:270](https://github.com/meistrari/railway-sdk/blob/f6f55aef3c274b44e5878f0130638d64cd35423c/src/resources/environment.ts#L270)
+Defined in: [src/resources/environment.ts:295](https://github.com/meistrari/railway-sdk/blob/cd91fb341616dbf6274f8020d8357d2afb6f934e/src/resources/environment.ts#L295)
 
 ## Type declaration
 
@@ -177,6 +177,28 @@ The project ID
 `Promise`\<`null` \| `string`\>
 
 The environment ID or null if not found
+
+### patch()
+
+> **patch**: (`environmentId`, `commitMessage`, `patch`) => `Promise`\<`void`\>
+
+#### Parameters
+
+##### environmentId
+
+`string`
+
+##### commitMessage
+
+`string`
+
+##### patch
+
+`PatchData`
+
+#### Returns
+
+`Promise`\<`void`\>
 
 ### rename()
 

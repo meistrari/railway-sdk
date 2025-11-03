@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/index.ts:7](https://github.com/meistrari/railway-sdk/blob/f6f55aef3c274b44e5878f0130638d64cd35423c/src/resources/index.ts#L7)
+Defined in: [src/resources/index.ts:7](https://github.com/meistrari/railway-sdk/blob/cd91fb341616dbf6274f8020d8357d2afb6f934e/src/resources/index.ts#L7)
 
 ## Type declaration
 
@@ -106,19 +106,19 @@ The input parameters
 
 ###### status?
 
-\{ `in?`: (`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[]; `notIn?`: (`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[]; \} = `...`
+\{ `in?`: (`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[]; `notIn?`: (`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[]; \} = `...`
 
 (Optional) Filter deployments by status
 
 ###### status.in?
 
-(`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[] = `...`
+(`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[] = `...`
 
 (Optional) Array of statuses to include
 
 ###### status.notIn?
 
-(`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[] = `...`
+(`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[] = `...`
 
 (Optional) Array of statuses to exclude
 
@@ -295,6 +295,28 @@ The project ID
 `Promise`\<`null` \| `string`\>
 
 The environment ID or null if not found
+
+#### environment.patch()
+
+> **patch**: (`environmentId`, `commitMessage`, `patch`) => `Promise`\<`void`\>
+
+##### Parameters
+
+###### environmentId
+
+`string`
+
+###### commitMessage
+
+`string`
+
+###### patch
+
+`PatchData`
+
+##### Returns
+
+`Promise`\<`void`\>
 
 #### environment.rename()
 
@@ -497,6 +519,28 @@ The ID of the environment
 `Promise`\<`object`[]\>
 
 Array of service instances with their domains
+
+#### service.instanceUpdate()
+
+> **instanceUpdate**: (`serviceId`, `environmentId`, `input`) => `Promise`\<`void`\>
+
+##### Parameters
+
+###### serviceId
+
+`string`
+
+###### environmentId
+
+`string`
+
+###### input
+
+`InstanceUpdateInput`
+
+##### Returns
+
+`Promise`\<`void`\>
 
 ### variable
 
