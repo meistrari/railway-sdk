@@ -180,7 +180,7 @@ export async function waitForDeployment({
     updatedAt: string
   }
 
-  const progressStatuses = ['INITIALIZING', 'BUILDING', 'DEPLOYING']
+  const progressStatuses = ['INITIALIZING', 'BUILDING', 'DEPLOYING', 'QUEUED']
   const failureStatuses = ['FAILED', 'CRASHED', 'REMOVED']
   const successStatuses = ['SUCCESS']
 
