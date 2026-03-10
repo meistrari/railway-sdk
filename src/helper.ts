@@ -23,7 +23,7 @@ async function graphQLRequest<T = unknown>(query: string, variables: Record<stri
 
   if (!response.ok) {
     console.error('❌ GraphQL request failed')
-    console.error(query, JSON.stringify(variables, null, 2), await response.text())
+    console.error(query, await response.text())
     throw new RailwayRequestError(response)
   }
 
