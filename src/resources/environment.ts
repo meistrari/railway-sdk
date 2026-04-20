@@ -267,16 +267,180 @@ async function rename(environmentId: string, newName: string) {
   `)
 }
 
-type PatchData = {
-  services: Record<string, {
-    source?: {
-      repo?: string | null
-      branch?: string | null
-    }
+type Nullable<T> = T | null
+
+type ServiceSource = {
+  image?: Nullable<string>
+  repo?: Nullable<string>
+  branch?: Nullable<string>
+  commitSha?: Nullable<string>
+  upstreamUrl?: Nullable<string>
+  rootDirectory?: Nullable<string>
+  checkSuites?: Nullable<boolean>
+  autoUpdates?: Nullable<{
+    type?: Nullable<'disabled' | 'patch' | 'minor'>
+    schedule?: Nullable<Array<{
+      day: number
+      startHour: number
+      endHour: number
+    }>>
+    tagMode?: Nullable<'semver' | 'sha'>
   }>
 }
 
-async function patch(environmentId: string, commitMessage: string, patch: PatchData) {
+type ServiceDomain = {
+  port?: Nullable<number>
+}
+
+type ServiceNetworking = {
+  serviceDomains?: Nullable<Record<string, Nullable<ServiceDomain>>>
+  customDomains?: Nullable<Record<string, Nullable<ServiceDomain>>>
+  tcpProxies?: Nullable<Record<string, Nullable<Record<string, never>>>>
+  privateNetworkEndpoint?: Nullable<string>
+}
+
+type EnvironmentVariable = {
+  description?: Nullable<string>
+  defaultValue?: Nullable<string>
+  isOptional?: Nullable<boolean>
+  isSealed?: Nullable<boolean>
+  value?: Nullable<string>
+  generator?: Nullable<string>
+  preserveExisting?: Nullable<boolean>
+}
+
+type NixpacksPhase = {
+  name?: string
+  dependsOn?: string[]
+  cmds?: string[]
+  nixPkgs?: string[]
+  nixLibs?: string[]
+  aptPkgs?: string[]
+  nixOverlays?: string[]
+  nixPkgsArchive?: string
+  includedFiles?: string[]
+  cacheDirectories?: string[]
+  paths?: string[]
+}
+
+type NixpacksPlan = {
+  providers?: string[]
+  phases?: Record<string, NixpacksPhase>
+  [key: string]: unknown
+}
+
+type ServiceBuild = {
+  builder?: Nullable<'NIXPACKS' | 'DOCKERFILE' | 'RAILPACK' | 'HEROKU' | 'PAKETO'>
+  watchPatterns?: Nullable<string[]>
+  buildCommand?: Nullable<string>
+  buildEnvironment?: Nullable<'V2' | 'V3'>
+  dockerfilePath?: Nullable<string>
+  nixpacksConfigPath?: Nullable<string>
+  nixpacksPlan?: Nullable<NixpacksPlan>
+  nixpacksVersion?: Nullable<string>
+  railpackVersion?: Nullable<string>
+}
+
+type ServiceDeploy = {
+  startCommand?: Nullable<string>
+  preDeployCommand?: Nullable<string | [string]>
+  healthcheckPath?: Nullable<string>
+  healthcheckTimeout?: Nullable<number>
+  sleepApplication?: Nullable<boolean>
+  registryCredentials?: Nullable<{
+    username: string
+    password: string
+  }>
+  restartPolicyType?: Nullable<'ON_FAILURE' | 'ALWAYS' | 'NEVER'>
+  restartPolicyMaxRetries?: Nullable<number>
+  cronSchedule?: Nullable<string>
+  multiRegionConfig?: Nullable<Record<string, Nullable<{
+    numReplicas?: Nullable<number>
+  }>>>
+  limitOverride?: Nullable<{
+    containers?: Nullable<{
+      cpu?: Nullable<number>
+      memoryBytes?: Nullable<number>
+      diskBytes?: Nullable<number>
+    }>
+  }>
+  requiredMountPath?: Nullable<string>
+  overlapSeconds?: Nullable<number>
+  drainingSeconds?: Nullable<number>
+  ipv6EgressEnabled?: Nullable<boolean>
+}
+
+type ServiceConfig = {
+  source?: Nullable<ServiceSource>
+  networking?: Nullable<ServiceNetworking>
+  variables?: Nullable<Record<string, Nullable<EnvironmentVariable>>>
+  build?: Nullable<ServiceBuild>
+  deploy?: Nullable<ServiceDeploy>
+  configFile?: Nullable<string>
+  volumeMounts?: Nullable<Record<string, {
+    mountPath?: Nullable<string>
+    backupSchedules?: Nullable<Array<'DAILY' | 'WEEKLY' | 'MONTHLY'>>
+  }>>
+  isDeleted?: Nullable<boolean>
+  isCreated?: Nullable<boolean>
+  parentServiceId?: Nullable<string>
+  groupId?: Nullable<string>
+  clusterRole?: Nullable<'root' | 'replica' | 'internal' | 'edge'>
+  replicaConfig?: Nullable<{
+    minReplicas?: Nullable<number>
+    maxReplicas?: Nullable<number>
+    step?: Nullable<number>
+    scalable?: Nullable<boolean>
+  }>
+  clusterDisplay?: Nullable<{
+    badge?: Nullable<string>
+    badgeVariant?: Nullable<'primary' | 'secondary' | 'muted'>
+  }>
+}
+
+type VolumeConfig = {
+  sizeMB?: Nullable<number>
+  region?: Nullable<string>
+  alerts?: Nullable<{
+    usage?: Nullable<Record<string, Nullable<Record<string, never>>>>
+  }>
+  isDeleted?: Nullable<boolean>
+  isCreated?: Nullable<boolean>
+  allowOnlineResize?: Nullable<boolean>
+  forkFromBaseEnvironment?: Nullable<boolean>
+}
+
+type BucketConfig = {
+  region?: Nullable<string>
+  isDeleted?: Nullable<boolean>
+  isCreated?: Nullable<boolean>
+}
+
+type GroupConfig = {
+  name?: Nullable<string>
+  color?: Nullable<string>
+  icon?: Nullable<string>
+  isCollapsed?: Nullable<boolean>
+  isDeleted?: Nullable<boolean>
+  isCreated?: Nullable<boolean>
+}
+
+/**
+ * Environment configuration as defined by the Railway schema.
+ * See https://backboard.railway.com/schema/environment.schema.json
+ */
+export type EnvironmentConfig = {
+  services?: Nullable<Record<string, Nullable<ServiceConfig>>>
+  sharedVariables?: Nullable<Record<string, Nullable<EnvironmentVariable>>>
+  volumes?: Nullable<Record<string, VolumeConfig>>
+  buckets?: Nullable<Record<string, BucketConfig>>
+  groups?: Nullable<Record<string, GroupConfig>>
+  privateNetworkDisabled?: Nullable<boolean>
+  degraded?: Nullable<string[]>
+  stopServices?: Nullable<string[]>
+}
+
+async function patch(environmentId: string, commitMessage: string, patch: EnvironmentConfig) {
   const input = {
     environmentId,
     commitMessage,

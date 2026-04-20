@@ -8,6 +8,10 @@
 
 Manage Railway environments
 
+## Type Aliases
+
+- [EnvironmentConfig](type-aliases/EnvironmentConfig.md)
+
 ## Variables
 
 - [default](variables/default.md)

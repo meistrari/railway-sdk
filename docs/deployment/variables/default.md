@@ -8,7 +8,7 @@
 
 > **default**: `object`
 
-Defined in: [src/resources/deployment.ts:159](https://github.com/meistrari/railway-sdk/blob/89e48cb35ecb887db7af6cceb526b1f9b79fef96/src/resources/deployment.ts#L159)
+Defined in: [src/resources/deployment.ts:159](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/deployment.ts#L159)
 
 ## Type declaration
 
@@ -102,19 +102,19 @@ The input parameters
 
 ###### status?
 
-\{ `in?`: (`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[]; `notIn?`: (`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[]; \} = `...`
+\{ `in?`: (`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[]; `notIn?`: (`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[]; \} = `...`
 
 (Optional) Filter deployments by status
 
 ###### status.in?
 
-(`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[] = `...`
+(`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[] = `...`
 
 (Optional) Array of statuses to include
 
 ###### status.notIn?
 
-(`"INITIALIZING"` \| `"BUILDING"` \| `"DEPLOYING"` \| `"FAILED"` \| `"CRASHED"` \| `"REMOVED"` \| `"SUCCESS"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"WAITING"`)[] = `...`
+(`"BUILDING"` \| `"CRASHED"` \| `"DEPLOYING"` \| `"FAILED"` \| `"INITIALIZING"` \| `"NEEDS_APPROVAL"` \| `"QUEUED"` \| `"REMOVED"` \| `"REMOVING"` \| `"SKIPPED"` \| `"SLEEPING"` \| `"SUCCESS"` \| `"WAITING"`)[] = `...`
 
 (Optional) Array of statuses to exclude
 
