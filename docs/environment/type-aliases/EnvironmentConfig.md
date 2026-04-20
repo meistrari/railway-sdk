@@ -8,7 +8,7 @@
 
 > **EnvironmentConfig** = `object`
 
-Defined in: [src/resources/environment.ts:432](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L432)
+Defined in: [src/resources/environment.ts:432](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L432)
 
 Environment configuration as defined by the Railway schema.
 See https://backboard.railway.com/schema/environment.schema.json
@@ -19,7 +19,7 @@ See https://backboard.railway.com/schema/environment.schema.json
 
 > `optional` **buckets**: `Nullable`\<`Record`\<`string`, `BucketConfig`\>\>
 
-Defined in: [src/resources/environment.ts:436](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L436)
+Defined in: [src/resources/environment.ts:436](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L436)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [src/resources/environment.ts:436](https://github.com/meistrari/rail
 
 > `optional` **degraded**: `Nullable`\<`string`[]\>
 
-Defined in: [src/resources/environment.ts:439](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L439)
+Defined in: [src/resources/environment.ts:439](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L439)
 
 ***
 
@@ -35,7 +35,7 @@ Defined in: [src/resources/environment.ts:439](https://github.com/meistrari/rail
 
 > `optional` **groups**: `Nullable`\<`Record`\<`string`, `GroupConfig`\>\>
 
-Defined in: [src/resources/environment.ts:437](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L437)
+Defined in: [src/resources/environment.ts:437](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L437)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: [src/resources/environment.ts:437](https://github.com/meistrari/rail
 
 > `optional` **privateNetworkDisabled**: `Nullable`\<`boolean`\>
 
-Defined in: [src/resources/environment.ts:438](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L438)
+Defined in: [src/resources/environment.ts:438](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L438)
 
 ***
 
@@ -51,7 +51,7 @@ Defined in: [src/resources/environment.ts:438](https://github.com/meistrari/rail
 
 > `optional` **services**: `Nullable`\<`Record`\<`string`, `Nullable`\<`ServiceConfig`\>\>\>
 
-Defined in: [src/resources/environment.ts:433](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L433)
+Defined in: [src/resources/environment.ts:433](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L433)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [src/resources/environment.ts:433](https://github.com/meistrari/rail
 
 > `optional` **sharedVariables**: `Nullable`\<`Record`\<`string`, `Nullable`\<`EnvironmentVariable`\>\>\>
 
-Defined in: [src/resources/environment.ts:434](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L434)
+Defined in: [src/resources/environment.ts:434](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L434)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: [src/resources/environment.ts:434](https://github.com/meistrari/rail
 
 > `optional` **stopServices**: `Nullable`\<`string`[]\>
 
-Defined in: [src/resources/environment.ts:440](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L440)
+Defined in: [src/resources/environment.ts:440](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L440)
 
 ***
 
@@ -75,4 +75,4 @@ Defined in: [src/resources/environment.ts:440](https://github.com/meistrari/rail
 
 > `optional` **volumes**: `Nullable`\<`Record`\<`string`, `VolumeConfig`\>\>
 
-Defined in: [src/resources/environment.ts:435](https://github.com/meistrari/railway-sdk/blob/db638d410c5cac17882a242e4d50c5d06841189b/src/resources/environment.ts#L435)
+Defined in: [src/resources/environment.ts:435](https://github.com/meistrari/railway-sdk/blob/7ba120fd032a30ea756bad8ad8bcdd20880a2740/src/resources/environment.ts#L435)
